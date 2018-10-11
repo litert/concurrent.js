@@ -25,8 +25,6 @@ export interface InMemoryOptions {
 
 interface IDetails {
 
-    currency: number;
-
     value: number;
 
     expiringAt: number;
@@ -112,7 +110,6 @@ implements C.RateLimiter.IDriver {
         if (!item) {
 
             item = {
-                currency,
                 value: 0,
                 expiringAt: NOW + period
             };
@@ -120,9 +117,15 @@ implements C.RateLimiter.IDriver {
         else {
 
             isExpired = item.expiringAt < NOW;
+
+            if (isExpired) {
+
+                item.value = 0;
+                item.expiringAt = NOW + period;
+            }
         }
 
-        let v = item.value + step;
+        const v = item.value + step;
 
         if (v > currency) {
 

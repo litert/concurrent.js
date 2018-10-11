@@ -14,4 +14,25 @@
  *  limitations under the License.
  */
 
-export * from "./InMemoryDriver";
+import logs from "./loggers";
+
+import RateLimiters from "../libs";
+
+const limiter = RateLimiters.createRateLimiter({
+    key: "test",
+    currency: 1,
+    period: 333
+});
+
+setInterval(async () => {
+
+    if (await limiter.walk()) {
+
+        logs.info(`Ok`);
+    }
+    else {
+
+        logs.error(`Blocked`);
+    }
+
+}, 50);

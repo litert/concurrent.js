@@ -18,6 +18,17 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "[LiteRT/Concurrent.js] Sample: Balanced RateLimiter",
+            "program": "${workspaceFolder}/src/samples/sample-ratelimiter-balanced.ts",
+            "sourceMaps": true,
+            "outFiles": [
+                "${workspaceFolder}/samples/*.js",
+                "${workspaceFolder}/libs/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "[LiteRT/Concurrent.js] Sample: Semaphore",
             "program": "${workspaceFolder}/src/samples/sample-semaphore.ts",
             "sourceMaps": true,
